@@ -1,0 +1,141 @@
+.promocode-container {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-left: 90px;
+  padding-right: 50px;
+}
+
+.product-card-container {
+  display: inline-block;
+  margin-top: 10px;
+  width: 200px;
+  max-width: 200px;
+  height: 280px;
+  border-radius: 10px;
+}
+
+.product-section-button {
+  background-color: #fff;
+  border-radius: 20px;
+  height: 40px;
+  box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16),
+    0 3px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 4px 2px rgba(0, 0, 0, 0.09);
+}
+
+.product-section-button:hover,
+.product-section-button:focus {
+  background-color: #fff;
+  border-radius: 20px;
+  height: 40px;
+  box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16),
+    0 3px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 4px 2px rgba(0, 0, 0, 0.09);
+}
+
+.product-section-top-div {
+  margin-bottom: 20px;
+}
+
+.product-section-bottom-div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-section-bottom-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.promo-section-top-div {
+  margin-bottom: 20px;
+}
+
+.promo-inner-card {
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+.promo-section-button {
+  background-color: #fff;
+  border-radius: 20px;
+  height: 40px;
+  box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16),
+    0 3px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 4px 2px rgba(0, 0, 0, 0.09);
+}
+
+.promo-section-button:hover,
+.promo-section-button:active {
+  background-color: #fff;
+  border-radius: 20px;
+  height: 40px;
+  box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16),
+    0 3px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 4px 2px rgba(0, 0, 0, 0.09);
+}
+
+.promo-inner-card > .ant-card-body {
+  padding: 0;
+}
+
+.promo-divider {
+  margin: 15px 0;
+}
+
+.promo-inner-card-div-first {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.promo-inner-card-div-second {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 15px;
+  padding-left: 5px;
+}
+
+.edit-button,
+.active-button,
+.deactive-button {
+  width: 100px;
+  height: 40px;
+  border-radius: 20px;
+  margin-right: 10px;
+  background-color: #ffff00;
+  border: none;
+}
+
+.active-button {
+  background-color: #fff0df;
+  color: rgb(129, 62, 23);
+}
+
+.deactive-button {
+  background-color: #ffcebf;
+  color: rgb(221, 62, 14);
+}
+
+.edit-button:hover,
+.edit-button:focus {
+  background-color: #ffff00;
+  border: none;
+  color: black;
+}
+
+.active-button:hover,
+.active-button:focus {
+  background-color: #fff0df;
+  border: none;
+  color: rgb(129, 62, 23);
+}
+
+.deactive-button:hover,
+.deactive-button:focus {
+  background-color: #ffcebf;
+  color: rgb(221, 62, 14);
+  border: none;
+}

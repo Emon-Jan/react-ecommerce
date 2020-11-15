@@ -1,0 +1,153 @@
+.admin-product-card-container,
+.admin-card-container-hover {
+  display: inline-block;
+  margin-top: 10px;
+  width: 200px;
+  height: 280px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.admin-product-container {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-left: 90px;
+  padding-right: 20px;
+}
+
+.admin-card-container-hover {
+  opacity: 0.7;
+}
+
+.admin-product-section-button {
+  background-color: #fff;
+  border-radius: 20px;
+  height: 40px;
+  box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16),
+    0 3px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 4px 2px rgba(0, 0, 0, 0.09);
+}
+
+.admin-product-section-button:hover,
+.admin-product-section-button:focus {
+  background-color: #fff;
+  border-radius: 20px;
+  height: 40px;
+  box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16),
+    0 3px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 4px 2px rgba(0, 0, 0, 0.09);
+}
+
+.admin-product-section-top-div {
+  margin-bottom: 20px;
+}
+
+.admin-product-section-bottom-div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-section-bottom-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.addform-card-container {
+  border-radius: 5px;
+  margin-top: 15px;
+  width: 280px;
+  height: max-content;
+}
+
+.addform-form-input-label {
+  margin: 20px;
+}
+
+.addform-form-input-label label {
+  font-weight: 600;
+  color: rgb(83, 91, 97);
+}
+
+.add-button {
+  width: 120px;
+  height: 35px;
+  margin-left: 70px;
+  margin-bottom: 20px;
+  background-color: yellow;
+  border: none;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.add-button:hover,
+.add-button:active,
+.add-button:focus {
+  background-color: yellow;
+  border: none;
+  border-radius: 15px;
+  color: black;
+  font-weight: 600;
+}
+
+.avatar-uploader,
+.avatar-uploader-back {
+  width: 230px;
+  height: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
+  background-color: yellow;
+  font-weight: 600;
+}
+
+.avatar-uploader-back {
+  background-color: #fff;
+}
+
+.active-switch {
+  margin-left: 140px;
+}
+
+.avatar-uploader div {
+  cursor: default;
+}
+
+.product-img {
+  height: 135px;
+}
+
+.admin-parent-div {
+  position: relative;
+}
+
+.admin-card-button-hover {
+  position: absolute;
+  top: 80px;
+  left: 70px;
+  background-color: rgb(255, 217, 0);
+  border-radius: 15px;
+  border: none;
+  color: black;
+}
+
+.admin-card-button-hover:hover,
+.admin-card-button-hover:focus {
+  background-color: rgb(255, 217, 0);
+  border-radius: 15px;
+  border: none;
+  color: black;
+}
+
+.admin-card-div-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-card-div-container > p {
+  font-size: 12px;
+  color: #575555;
+}

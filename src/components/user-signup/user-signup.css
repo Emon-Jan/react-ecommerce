@@ -1,0 +1,21 @@
+.login-input_field {
+  border: 1px solid #ececec;
+  box-shadow: none;
+}
+
+.login-input_field:hover,
+.login-input_field:focus {
+  border: 1px solid #ececec;
+  box-shadow: none;
+}
+
+.signup-modal-mes-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-modal-span-top {
+  padding-top: 10px;
+}

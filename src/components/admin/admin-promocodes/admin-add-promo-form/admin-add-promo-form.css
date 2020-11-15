@@ -1,0 +1,52 @@
+.date-input-field {
+  width: 100%;
+}
+
+.form-button-section {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.promo-add-button,
+.promo-update-button,
+.promo-cancel-button {
+  width: 120px;
+  height: 35px;
+  margin-bottom: 20px;
+  background-color: yellow;
+  border: none;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.promo-add-button:hover,
+.promo-add-button:focus {
+  background-color: yellow;
+  border: none;
+  border-radius: 15px;
+  color: black;
+  font-weight: 600;
+}
+
+.promo-cancel-button {
+  background-color: red;
+  color: #fff;
+}
+
+.promo-update-button:hover,
+.promo-update-button:focus {
+  background-color: yellow;
+  border: none;
+  border-radius: 20px;
+  color: black;
+  font-weight: 600;
+}
+
+.promo-cancel-button:hover,
+.promo-cancel-button:focus {
+  background-color: red;
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  font-weight: 600;
+}
