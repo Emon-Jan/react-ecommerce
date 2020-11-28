@@ -20,6 +20,8 @@ import { Content } from "antd/lib/layout/layout";
 import MessageModal from "./components/modal/message-modal";
 import { getDiscountedPrice } from "./utils/helper";
 
+import storage from "./config/firebase";
+
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
@@ -37,6 +39,10 @@ class App extends Component {
     promoError: "",
     searchText: "",
     userPassword: "",
+    imageFileName: "",
+    preProductAvatarUrl: "",
+    resizedImage: null,
+    progress: null,
     orderStatusType: "all",
     isEditProduct: false,
     isModalOpen: false,
@@ -130,14 +136,59 @@ class App extends Component {
     this.setState({ searchText: e.target.value });
   };
 
-  getBase64 = async (img) => {
-    const uri = await resizeFile(img);
-    this.setState({ product: { ...this.state.product, avatar: uri } });
+  uploadImageFile = (imageFileName, image) => {
+    const uploadResponse = storage
+      .ref(`images/${imageFileName}`)
+      .putString(image, "data_url");
+
+    uploadResponse.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        this.setState({ progress });
+      },
+      (error) => {
+        message.error(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(imageFileName)
+          .getDownloadURL()
+          .then((url) => {
+            this.setState({
+              product: { ...this.state.product, avatar: url },
+            });
+          })
+          .catch((err) => {
+            message.error(err);
+          });
+      }
+    );
+  };
+
+  processImageFile = async (img) => {
+    try {
+      const resizedImage = await resizeFile(img);
+      const imageFileName = Date.now().toString().concat("_", img.name);
+      this.setState({
+        imageFileName,
+        product: { ...this.state.product, avatar: resizedImage },
+      });
+      this.uploadImageFile(imageFileName, resizedImage);
+    } catch (err) {
+      message.error(err);
+    }
   };
 
   handleImageUploadChange = (e) => {
-    if (e.target.files[0] !== "") {
-      this.getBase64(e.target.files[0]);
+    if (e.target.files[0] && e.target.files[0] !== "") {
+      this.processImageFile(e.target.files[0]);
+    }
+    if (this.state.isEditProduct) {
+      this.setState({ preProductAvatarUrl: this.state.product.avatar });
     }
   };
 
@@ -378,27 +429,37 @@ class App extends Component {
     this.setState({ showProductForm: true });
   };
 
+  resetProductForm = () => {
+    this.setState({
+      progress: null,
+      imageFileName: "",
+      preProductAvatarUrl: "",
+      isEditProduct: false,
+      product: productInitalState,
+    });
+  };
+
   addProduct = async () => {
     const {
       title,
       avatar,
-      originalPrice,
-      discount,
-      shippingCharge,
-      color,
-      size,
       active,
+      color,
+      discount,
+      originalPrice,
+      shippingCharge,
+      size,
     } = this.state.product;
 
     const productObj = {
       title,
       avatar,
-      originalPrice,
-      discount,
-      shippingCharge,
-      color,
-      size,
       active,
+      color,
+      discount,
+      originalPrice,
+      shippingCharge,
+      size,
     };
 
     try {
@@ -414,13 +475,16 @@ class App extends Component {
 
       if (savedData.status === 201) {
         this.setState({
+          progress: null,
+          imageFileName: "",
           showProductForm: false,
-          products: [...this.state.products, savedData.data],
-          product: productInitalState,
           isProductModalOpen: true,
+          product: productInitalState,
         });
       }
-    } catch (error) {}
+    } catch (error) {
+      message.error(error);
+    }
   };
 
   onCheckout = async (totalPrice) => {
@@ -702,6 +766,19 @@ class App extends Component {
       size,
     };
 
+    if (!!this.state.preProductAvatarUrl) {
+      const previousImageUrl = this.state.preProductAvatarUrl;
+      const deleteRef = storage.refFromURL(previousImageUrl);
+      deleteRef
+        .delete()
+        .then(() => {
+          this.setState({ preProductAvatarUrl: "" });
+        })
+        .catch((err) => {
+          this.setState({ preProductAvatarUrl: "" });
+        });
+    }
+
     const token = getToken();
     const config = {
       headers: { "x-autentication-token": `bearer ${token}` },
@@ -728,6 +805,7 @@ class App extends Component {
             products,
             isEditProduct: false,
             product: productInitalState,
+            progress: null,
           },
           () => {
             message.success("Product Updated Successfully!");
@@ -739,9 +817,12 @@ class App extends Component {
   };
 
   onCancelUpdateProduct = () => {
-    this.setState({ isEditProduct: false, product: productInitalState }, () => {
-      this.props.history.replace("/admin/products");
-    });
+    this.setState(
+      { isEditProduct: false, product: productInitalState, progress: null },
+      () => {
+        this.props.history.replace("/admin/products");
+      }
+    );
   };
 
   onCancelSuccessModal = () => {
@@ -777,6 +858,7 @@ class App extends Component {
       promocodes,
       isEditPromocode,
       product,
+      progress,
       isEditProduct,
       promocodeData,
       isSignupModalOpen,
@@ -809,10 +891,12 @@ class App extends Component {
       },
       adminProductProps: {
         product,
+        progress,
         products,
         isEditProduct,
         showProductForm,
         isProductModalOpen,
+        resetProductForm: this.resetProductForm,
         setProductsToState: this.setProductsToState,
         showProductAddForm: this.showProductAddForm,
         addProduct: this.addProduct,
