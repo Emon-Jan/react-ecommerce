@@ -1,11 +1,18 @@
-import React from "react";
-import { Button, Card, Input, Switch } from "antd";
+import React, { useEffect } from "react";
+import { Button, Card, Input, Progress, Switch } from "antd";
 import { authAdmin } from "../../../../services/auth";
 import MessageModal from "../../../modal/message-modal";
 
 import { CheckCircleFilled } from "@ant-design/icons";
 
-const AdminProductAddForm = (props) => {
+const AdminProductForm = (props) => {
+  useEffect(() => {
+    // Anything in here is fired on component mount.
+    return () => {
+      props.resetProductForm();
+    };
+  }, []);
+
   if (!authAdmin()) {
     props.history.replace("/admin/login");
   }
@@ -24,30 +31,40 @@ const AdminProductAddForm = (props) => {
                 onChange={props.handleImageUploadChange}
               />
               <div
-                className={
-                  props.product.avatar === "" ||
-                  props.product.avatar === "File Not Found"
-                    ? "avatar-uploader"
-                    : "avatar-uploader-back"
-                }
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
                   upload.click();
                 }}
               >
-                {props.product.avatar === "" ||
-                props.product.avatar === "File Not Found" ? (
-                  <div>
+                {!props.product.avatar ? (
+                  <div className="avatar-uploader">
                     <div style={{ marginTop: 8 }}>Upload</div>
                     <div style={{ marginTop: 8 }}>Product Image</div>
                   </div>
                 ) : (
-                  <img
-                    className="product-img"
-                    src={props.product.avatar}
-                    alt="avatar"
-                  />
+                  <div className="avatar-uploader-blank">
+                    <img
+                      className={
+                        props.progress !== 100 && !props.isEditProduct
+                          ? "product-img__blur "
+                          : "product-img"
+                      }
+                      src={props.product.avatar}
+                      alt="avatar"
+                    />
+                    {!!props.progress && (
+                      <Progress
+                        type="line"
+                        strokeColor={{
+                          "0%": "#108ee9",
+                          "100%": "#87d068",
+                        }}
+                        showInfo={true}
+                        percent={props.progress}
+                      />
+                    )}
+                  </div>
                 )}
               </div>
             </div>
@@ -173,4 +190,4 @@ const AdminProductAddForm = (props) => {
   );
 };
 
-export default AdminProductAddForm;
+export default AdminProductForm;
