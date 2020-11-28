@@ -6,10 +6,10 @@ import Products from "../components/products/products";
 import ShoppingCart from "../components/shoppingcart/shoppingcart";
 import AdminPromoCodes from "../components/admin/admin-promocodes/admin-promocodes";
 import AdminOrders from "../components/admin/admin-orders/admin-orders";
-import AdminProductAddForm from "../components/admin/admin-products/admin-add-product-form/admin-add-product-form";
 import AdminPanel from "../components/admin/admin-panel/admin-panel";
 import UserLogin from "../components/user-signup/user-signup";
 import AdminPromoAddForm from "../components/admin/admin-promocodes/admin-add-promo-form/admin-add-promo-form";
+import AdminProductForm from "../components/admin/admin-products/admin-product-form/admin-product-form";
 
 class AppRouter extends Component {
   // eslint-disable-next-line no-useless-constructor
@@ -55,11 +55,11 @@ class AppRouter extends Component {
         />
         <Route
           path="/admin/add-product"
-          render={(p) => <AdminProductAddForm {...p} {...adminProductProps} />}
+          render={(p) => <AdminProductForm {...p} {...adminProductProps} />}
         />
         <Route
           path="/admin/edit-product"
-          render={(p) => <AdminProductAddForm {...p} {...adminProductProps} />}
+          render={(p) => <AdminProductForm {...p} {...adminProductProps} />}
         />
         <Route
           path="/admin/orders"

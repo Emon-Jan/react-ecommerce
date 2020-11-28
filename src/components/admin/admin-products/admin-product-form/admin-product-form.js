@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { Button, Card, Input, Progress, Switch } from "antd";
 import { authAdmin } from "../../../../services/auth";

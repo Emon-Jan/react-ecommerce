@@ -1,13 +1,13 @@
 export const productInitalState = {
   _id: "",
   title: "",
-  avatar: "",
   originalPrice: "",
   discount: "",
   shippingCharge: "",
   color: "",
   size: "",
   active: false,
+  avatar: null,
 };
 
 export const promoInitalState = {
