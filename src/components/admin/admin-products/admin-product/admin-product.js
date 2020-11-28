@@ -1,6 +1,8 @@
 import { Button, Card } from "antd";
 import React, { useState } from "react";
 
+import Fade from "react-reveal/Fade";
+
 function AdminProduct({ product, editProduct }) {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -21,27 +23,31 @@ function AdminProduct({ product, editProduct }) {
               : "admin-product-card-container"
           }
         >
-          <div className="admin-card-div-container">
-            <p>{product.title}</p>
-            <div className="card-footer">
-              <span className="card-span-left">{`BDT. ${product.originalPrice}`}</span>
-              <span className="card-span-right">{`${product.discount}%`}</span>
+          <Fade>
+            <div className="admin-card-div-container">
+              <p>{product.title}</p>
+              <div className="card-footer">
+                <span className="card-span-left">{`BDT. ${product.originalPrice}`}</span>
+                <span className="card-span-right">{`${product.discount}%`}</span>
+              </div>
             </div>
-          </div>
+          </Fade>
         </Card>
         {isHovered && (
-          <Button
-            className="admin-card-button-hover"
-            onClick={() => editProduct(product)}
-          >
-            Edit
-          </Button>
+          <div>
+            <Button
+              className="admin-card-button-hover"
+              onClick={() => editProduct(product)}
+            >
+              Edit
+            </Button>
+          </div>
         )}
       </div>
     );
   };
 
-  return productCard();
+  return <Fade>{productCard()}</Fade>;
 }
 
 export default AdminProduct;

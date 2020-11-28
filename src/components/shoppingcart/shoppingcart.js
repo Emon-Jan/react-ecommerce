@@ -8,6 +8,7 @@ import Icon, { DeleteFilled } from "@ant-design/icons";
 import CircleIcon from "../../icons/CircleIcon";
 import RadioButtonIcon from "../../icons/RadioButtonIcon";
 import BdtIcon from "../../icons/BdtIcon";
+import Fade from "react-reveal/Fade";
 
 const ICON_STYLE = {
   fontSize: 12,
@@ -50,70 +51,72 @@ class ShoppingCart extends Component {
 
         return (
           <div key={index}>
-            <Card className="inner-card" bordered={true}>
-              <DeleteFilled
-                className="delete-button"
-                onClick={() => this.props.onDeleteFromCart(cartObj)}
-              />
-              <div className="inner-card-div">
-                <div className="inner-card-div-first">
-                  <div>
-                    <Avatar shape="square" size={75} src={avatar} />
+            <Fade>
+              <Card className="inner-card" bordered={true}>
+                <DeleteFilled
+                  className="delete-button"
+                  onClick={() => this.props.onDeleteFromCart(cartObj)}
+                />
+                <div className="inner-card-div">
+                  <div className="inner-card-div-first">
+                    <div>
+                      <Avatar shape="square" size={75} src={avatar} />
+                    </div>
+                    <div className="inner-div-container">
+                      <div className="inner-div-first_title">{title}</div>
+                      <div className="inner-div-first_body">
+                        <Space size={20}>
+                          <span>Color: {color}</span>
+                          <span>Size: {size}</span>
+                        </Space>
+                      </div>
+                      <div>
+                        <span>Total Price: BDT. {discountedPrice}</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="inner-div-container">
-                    <div className="inner-div-first_title">{title}</div>
-                    <div className="inner-div-first_body">
-                      <Space size={20}>
-                        <span>Color: {color}</span>
-                        <span>Size: {size}</span>
-                      </Space>
+                  <div className="inner-card-div-second">
+                    <div>
+                      <span>Shipping Method: EMS</span>
                     </div>
                     <div>
-                      <span>Total Price: BDT. {discountedPrice}</span>
+                      <span>Shipping Charge: {shippingCharge}</span>
                     </div>
                   </div>
-                </div>
-                <div className="inner-card-div-second">
-                  <div>
-                    <span>Shipping Method: EMS</span>
-                  </div>
-                  <div>
-                    <span>Shipping Charge: {shippingCharge}</span>
-                  </div>
-                </div>
-                <div className="inner-card-div-third">
-                  <div className="quantity-div-wrapper">
+                  <div className="inner-card-div-third">
+                    <div className="quantity-div-wrapper">
+                      <div>
+                        <span>Quantity</span>
+                      </div>
+                      <div className="quantity-button-container">
+                        <div className="quantity-button-one">
+                          <PlusOutlined
+                            style={ICON_STYLE}
+                            onClick={() =>
+                              this.props.addToCart(cartObj.product, 1)
+                            }
+                          />
+                        </div>
+                        <div className="quantity-button-two">
+                          <span>{cartObj.quantity}</span>
+                        </div>
+                        <div className="quantity-button-three">
+                          <MinusOutlined
+                            style={ICON_STYLE}
+                            onClick={() => {
+                              this.props.removeFromCart(cartObj.product, -1);
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
                     <div>
-                      <span>Quantity</span>
+                      <span>{`Total Price: ${totalPrice}`}</span>
                     </div>
-                    <div className="quantity-button-container">
-                      <div className="quantity-button-one">
-                        <PlusOutlined
-                          style={ICON_STYLE}
-                          onClick={() =>
-                            this.props.addToCart(cartObj.product, 1)
-                          }
-                        />
-                      </div>
-                      <div className="quantity-button-two">
-                        <span>{cartObj.quantity}</span>
-                      </div>
-                      <div className="quantity-button-three">
-                        <MinusOutlined
-                          style={ICON_STYLE}
-                          onClick={() => {
-                            this.props.removeFromCart(cartObj.product, -1);
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <span>{`Total Price: ${totalPrice}`}</span>
                   </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </Fade>
           </div>
         );
       });

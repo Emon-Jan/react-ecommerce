@@ -5,6 +5,8 @@ import "./admin-orders.css";
 import { Button, Space } from "antd";
 import { authAdmin, getToken } from "../../../services/auth";
 
+import Fade from "react-reveal/Fade";
+
 const ORDER_STATUS_TYPES = {
   ALL: "all",
   PENDING: "pending",
@@ -32,46 +34,48 @@ class AdminOrders extends Component {
 
   render() {
     const tableRow = (order, index) => (
-      <tr className="table-row-div" key={index}>
-        <td>{index + 1}</td>
-        <td>{order.orderId}</td>
-        <td>{order.totalPrice}</td>
-        <td>
-          <div className="order-button-group">
-            {order.status === ORDER_STATUS_TYPES.PENDING && (
-              <Space>
-                <Button
-                  className={"order-confirm-button"}
-                  onClick={() =>
-                    this.props.setStatus(
-                      order,
-                      index,
-                      ORDER_STATUS_TYPES.CONFIRM
-                    )
-                  }
-                >
-                  Confirm
-                </Button>
-                <Button
-                  className="order-cancel-button"
-                  onClick={() =>
-                    this.props.setStatus(
-                      order,
-                      index,
-                      ORDER_STATUS_TYPES.CANCEL
-                    )
-                  }
-                >
-                  Cancel
-                </Button>
-              </Space>
-            )}
-          </div>
-        </td>
-        <td>
-          <span>{order.status}</span>
-        </td>
-      </tr>
+      <Fade>
+        <tr className="table-row-div" key={index}>
+          <td>{index + 1}</td>
+          <td>{order.orderId}</td>
+          <td>{order.totalPrice}</td>
+          <td>
+            <div className="order-button-group">
+              {order.status === ORDER_STATUS_TYPES.PENDING && (
+                <Space>
+                  <Button
+                    className={"order-confirm-button"}
+                    onClick={() =>
+                      this.props.setStatus(
+                        order,
+                        index,
+                        ORDER_STATUS_TYPES.CONFIRM
+                      )
+                    }
+                  >
+                    Confirm
+                  </Button>
+                  <Button
+                    className="order-cancel-button"
+                    onClick={() =>
+                      this.props.setStatus(
+                        order,
+                        index,
+                        ORDER_STATUS_TYPES.CANCEL
+                      )
+                    }
+                  >
+                    Cancel
+                  </Button>
+                </Space>
+              )}
+            </div>
+          </td>
+          <td>
+            <span>{order.status}</span>
+          </td>
+        </tr>
+      </Fade>
     );
 
     const tableBody = this.props.orders.map((order, index) => {
